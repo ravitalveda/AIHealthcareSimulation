@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Alarm.PoC.Processor\Alarm.PoC.Processor.csproj" />
+    <ProjectReference Include="..\SecuritiesEventPlatform.Processor\SecuritiesEventPlatform.Consumer.csproj" />
   </ItemGroup>
 
   <ItemGroup>

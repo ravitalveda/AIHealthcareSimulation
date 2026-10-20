@@ -1,6 +1,6 @@
-﻿using Alarm.PoC.Contracts;
+﻿using SecuritiesEventPlatform.Contracts;
 
-namespace Alarm.PoC.EventBus
+namespace SecuritiesEventPlatform.EventBus
 {
     public static class EventHub
     {

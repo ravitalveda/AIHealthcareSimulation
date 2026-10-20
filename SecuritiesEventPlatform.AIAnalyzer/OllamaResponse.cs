@@ -1,4 +1,4 @@
-﻿namespace Alarm.PoC.AIAnalyzer;
+﻿namespace SecuritiesEventPlatform.AIAnalyzer;
 
 public sealed class OllamaResponse
 {

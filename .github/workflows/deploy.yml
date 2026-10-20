@@ -1,0 +1,65 @@
+name: Securities Event Platform CI/CD
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-test-package:
+    name: Build Test Package
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: Build Solution
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run Tests
+        run: dotnet test --configuration Release --no-build
+
+      - name: Publish Incident Simulator
+        run: dotnet publish SecuritiesEventPlatform.Simulator/SecuritiesEventPlatform.Simulator.csproj -c Release -o publish/Simulator
+
+      - name: Publish Processor
+        run: dotnet publish SecuritiesEventPlatform.Processor/SecuritiesEventPlatform.Consumer.csproj -c Release -o publish/Processor
+
+      - name: Publish AI Risk Assessment Service
+        run: dotnet publish SecuritiesEventPlatform.AIAnalyzer/SecuritiesEventPlatform.AIAnalyzer.csproj -c Release -o publish/AIAnalyzer
+
+      - name: Publish Notification Service
+        run: dotnet publish SecuritiesEventPlatform.Notification/SecuritiesEventPlatform.Notification.csproj -c Release -o publish/Notification
+
+      - name: Upload Deployment Package
+        uses: actions/upload-artifact@v4
+        with:
+          name: SecuritiesEventPlatform
+          path: publish/
+          retention-days: 7
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: "**/TestResults/*.trx"
+          if-no-files-found: ignore

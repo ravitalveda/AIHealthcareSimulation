@@ -1,7 +1,7 @@
-﻿using Alarm.PoC.AIAnalyzer;
-using MassTransit;
-using Microsoft.Extensions.Hosting;
+﻿using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using SecuritiesEventPlatform.AIAnalyzer;
 
 var builder = Host.CreateApplicationBuilder(args);
 
@@ -9,15 +9,15 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddMassTransit(x =>
 {
-    x.AddConsumer<AlarmAiConsumer>();
+    x.AddConsumer<AIAssessmentConsumer>();
 
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host("localhost");
 
-        cfg.ReceiveEndpoint("alarm-ai", e =>
+        cfg.ReceiveEndpoint("ai-risk-assessment", e =>
         {
-            e.ConfigureConsumer<AlarmAiConsumer>(context);
+            e.ConfigureConsumer<AIAssessmentConsumer>(context);
 
             e.UseMessageRetry(r =>
                 r.Interval(3, TimeSpan.FromSeconds(5)));
@@ -27,6 +27,6 @@ builder.Services.AddMassTransit(x =>
 
 var app = builder.Build();
 
-Console.WriteLine("Alarm AI Analyzer started...");
+Console.WriteLine("AI Risk Assessment Service started...");
 
 await app.RunAsync();
