@@ -14,28 +14,28 @@ public class IncidentNotificationConsumer : IConsumer<AIAssessmentCompleted>
         var notificationAction = assessment.RiskLevel switch
         {
             "CRITICAL" =>
-                "Incident escalated to Operations Leadership and Support Team",
+                "Email & SMS Sent. Incident escalated to Operations Leadership and Support Team",
 
             "HIGH" =>
-                "Operations team notified for immediate investigation",
+                "Email & SMS Sent. Operations team notified for immediate investigation",
 
             "MEDIUM" =>
-                "Incident added to operational review queue",
+                "Email sent. Incident added to operational review queue",
 
             _ =>
-                "Incident logged for monitoring"
+                "Notification/Incident logged for monitoring"
         };
 
         Console.WriteLine();
         Console.WriteLine("=================================================");
-        Console.WriteLine("INCIDENT NOTIFICATION SERVICE");
+        Console.WriteLine("NOTIFICATION SERVICE");
         Console.WriteLine("=================================================");
         Console.WriteLine($"Incident Id   : {assessment.IncidentId}");
         Console.WriteLine($"Type          : {assessment.IncidentType}");
         Console.WriteLine($"Risk Level    : {assessment.RiskLevel}");
         Console.WriteLine($"Completed At  : {assessment.CompletedAtUtc:O}");
         Console.WriteLine();
-        Console.WriteLine("AI Assessment:");
+        Console.WriteLine("Assessment by AI as:");
         Console.WriteLine(assessment.AiAssessment);
         Console.WriteLine();
         Console.WriteLine($"Action Taken  : {notificationAction}");

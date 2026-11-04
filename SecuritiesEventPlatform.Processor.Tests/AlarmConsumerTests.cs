@@ -1,6 +1,4 @@
-﻿using SecuritiesEventPlatform.Processor;
-
-namespace SecuritiesEventPlatform.Processor.Tests;
+﻿namespace SecuritiesEventPlatform.Processor.Tests;
 
 public class IncidentProcessingConsumerTests
 {
