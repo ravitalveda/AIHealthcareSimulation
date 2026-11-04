@@ -102,6 +102,10 @@ SecuritiesEventPlatform
 
 ---
 
-## 👨‍💻 Author
+# 👨‍💻 Author
 
-**[Ravital Veda](https://github.com/ravitalveda)**
+**Rameshkumar Gudala**
+
+Engineering Manager | Cloud Architecture | AI | Azure & AWS  | .NET
+
+Passionate about AI, Engineering Management, Cloud-Native Architecture, .Net, Developer Experience, and Infrastructure Automation.
