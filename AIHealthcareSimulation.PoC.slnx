@@ -1,0 +1,21 @@
+<Solution>
+  <Folder Name="/AIHealthcareSimulation.AIAnalyzer/">
+    <Project Path="AIHealthcareSimulation.AIAnalyzer/AIHealthcareSimulation.AIAnalyzer.csproj" />
+  </Folder>
+  <Folder Name="/AIHealthcareSimulation.Contracts/">
+    <Project Path="AIHealthcareSimulation.Contracts/AIHealthcareSimulation.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/AIHealthcareSimulation.Notification/">
+    <Project Path="AIHealthcareSimulation.Notification/AIHealthcareSimulation.Notification.csproj" />
+  </Folder>
+  <Folder Name="/AIHealthcareSimulation.Processor.Tests/">
+    <Project Path="AIHealthcareSimulation.Processor.Tests/AIHealthcareSimulation.Processor.Tests.csproj" />
+  </Folder>
+  <Folder Name="/AIHealthcareSimulation.Processor/">
+    <Project Path="AIHealthcareSimulation.Processor/AIHealthcareSimulation.Consumer.csproj" />
+  </Folder>
+  <Folder Name="/AIHealthcareSimulation.Simulator/">
+    <Project Path="AIHealthcareSimulation.Simulator/AIHealthcareSimulation.Simulator.csproj" />
+  </Folder>
+  <Project Path="AIHealthcareSimulation.Api/AIHealthcareSimulation.Api.csproj" />
+</Solution>

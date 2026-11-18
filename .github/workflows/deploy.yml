@@ -1,4 +1,4 @@
-name: Securities Event Platform CI/CD
+name: Hospital Simulation Training Platform CI/CD
 
 on:
   push:
@@ -28,6 +28,22 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install Frontend Dependencies
+        run: npm ci --prefix frontend
+
+      - name: Build Frontend
+        run: npm run build --prefix frontend
+
+      - name: Lint Frontend
+        run: npm run lint --prefix frontend
+
       - name: Restore Dependencies
         run: dotnet restore
 
@@ -38,21 +54,27 @@ jobs:
         run: dotnet test --configuration Release --no-build
 
       - name: Publish Incident Simulator
-        run: dotnet publish SecuritiesEventPlatform.Simulator/SecuritiesEventPlatform.Simulator.csproj -c Release -o publish/Simulator
+        run: dotnet publish AIHealthcareSimulation.Simulator/AIHealthcareSimulation.Simulator.csproj -c Release -o publish/Simulator
 
       - name: Publish Processor
-        run: dotnet publish SecuritiesEventPlatform.Processor/SecuritiesEventPlatform.Consumer.csproj -c Release -o publish/Processor
+        run: dotnet publish AIHealthcareSimulation.Processor/AIHealthcareSimulation.Consumer.csproj -c Release -o publish/Processor
 
-      - name: Publish AI Risk Assessment Service
-        run: dotnet publish SecuritiesEventPlatform.AIAnalyzer/SecuritiesEventPlatform.AIAnalyzer.csproj -c Release -o publish/AIAnalyzer
+      - name: Publish API
+        run: dotnet publish AIHealthcareSimulation.Api/AIHealthcareSimulation.Api.csproj -c Release -o publish/Api
+
+      - name: Publish AI Training Debrief Service
+        run: dotnet publish AIHealthcareSimulation.AIAnalyzer/AIHealthcareSimulation.AIAnalyzer.csproj -c Release -o publish/AIAnalyzer
 
       - name: Publish Notification Service
-        run: dotnet publish SecuritiesEventPlatform.Notification/SecuritiesEventPlatform.Notification.csproj -c Release -o publish/Notification
+        run: dotnet publish AIHealthcareSimulation.Notification/AIHealthcareSimulation.Notification.csproj -c Release -o publish/Notification
+
+      - name: Package Frontend
+        run: mkdir -p publish/Frontend && cp -R frontend/dist/. publish/Frontend/
 
       - name: Upload Deployment Package
         uses: actions/upload-artifact@v4
         with:
-          name: SecuritiesEventPlatform
+          name: AIHealthcareSimulation
           path: publish/
           retention-days: 7
 

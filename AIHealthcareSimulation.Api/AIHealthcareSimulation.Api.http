@@ -1,0 +1,25 @@
+@AIHealthcareSimulation.Api_HostAddress = http://localhost:5277
+
+### List the sample training scenarios
+GET {{AIHealthcareSimulation.Api_HostAddress}}/api/scenarios
+Accept: application/json
+
+### Start a sample simulation
+POST {{AIHealthcareSimulation.Api_HostAddress}}/api/simulations
+Content-Type: application/json
+
+{
+  "simulationId": "65c825aa-5ce5-4e8e-9fd8-588f31eb4e7c",
+  "scenarioId": "patient-identification",
+  "behaviorOptionId": "practice"
+}
+
+### Reject an unknown scenario
+POST {{AIHealthcareSimulation.Api_HostAddress}}/api/simulations
+Content-Type: application/json
+
+{
+  "simulationId": "65c825aa-5ce5-4e8e-9fd8-588f31eb4e7c",
+  "scenarioId": "unknown",
+  "behaviorOptionId": "practice"
+}
