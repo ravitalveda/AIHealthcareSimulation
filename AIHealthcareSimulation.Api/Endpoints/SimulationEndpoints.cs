@@ -8,9 +8,6 @@ namespace AIHealthcareSimulation.Api.Endpoints;
 /// <summary>Maps endpoints for starting training simulations.</summary>
 public static class SimulationEndpoints
 {
-    /// <summary>Maps simulation endpoints onto the application.</summary>
-    /// <param name="endpoints">The application's endpoint route builder.</param>
-    /// <returns>The endpoint route builder for further configuration.</returns>
     public static IEndpointRouteBuilder MapSimulationEndpoints(
         this IEndpointRouteBuilder endpoints)
     {
@@ -79,7 +76,7 @@ public static class SimulationEndpoints
             .WithName("CreateSimulation")
             .WithSummary("Start a hospital simulation training assessment")
             .WithDescription(
-                "Publishes the selected simulated behavior to RabbitMQ for rubric assessment and AI reflection.")
+                "Processes the selected behavior in the API through rubric assessment and AI reflection.")
             .Produces<SimulationAcceptedResponse>(StatusCodes.Status202Accepted)
             .ProducesValidationProblem();
 

@@ -1,6 +1,6 @@
 using AIHealthcareSimulation.Contracts;
 
-namespace AIHealthcareSimulation.Processor.Tests;
+namespace AIHealthcareSimulation.Tests;
 
 public class HospitalSimulationScenarioCatalogTests
 {

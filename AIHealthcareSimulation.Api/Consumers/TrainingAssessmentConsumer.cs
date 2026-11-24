@@ -1,9 +1,9 @@
-using MassTransit;
 using AIHealthcareSimulation.Contracts;
+using MassTransit;
 
-namespace AIHealthcareSimulation.Processor;
+namespace AIHealthcareSimulation.Api.Consumers;
 
-public class TrainingAssessmentConsumer : IConsumer<HospitalSimulationBehavior>
+public sealed class TrainingAssessmentConsumer : IConsumer<HospitalSimulationBehavior>
 {
     public static TrainingOutcome AssessOutcome(bool metExpectedBehavior) =>
         metExpectedBehavior
@@ -14,17 +14,6 @@ public class TrainingAssessmentConsumer : IConsumer<HospitalSimulationBehavior>
     {
         var behavior = context.Message;
         var outcome = AssessOutcome(behavior.MetExpectedBehavior);
-
-        Console.WriteLine();
-        Console.WriteLine("=================================================");
-        Console.WriteLine("HOSPITAL SIMULATION TRAINING ASSESSMENT");
-        Console.WriteLine("=================================================");
-        Console.WriteLine($"Simulation Id : {behavior.SimulationId}");
-        Console.WriteLine($"Scenario      : {behavior.ScenarioName}");
-        Console.WriteLine($"Staff Role    : {behavior.StaffRole}");
-        Console.WriteLine($"Observed      : {behavior.ObservedBehavior}");
-        Console.WriteLine($"Outcome       : {outcome}");
-        Console.WriteLine("=================================================");
 
         await context.Publish(new TrainingAssessmentProcessed
         {

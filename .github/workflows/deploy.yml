@@ -56,17 +56,8 @@ jobs:
       - name: Publish Incident Simulator
         run: dotnet publish AIHealthcareSimulation.Simulator/AIHealthcareSimulation.Simulator.csproj -c Release -o publish/Simulator
 
-      - name: Publish Processor
-        run: dotnet publish AIHealthcareSimulation.Processor/AIHealthcareSimulation.Consumer.csproj -c Release -o publish/Processor
-
       - name: Publish API
         run: dotnet publish AIHealthcareSimulation.Api/AIHealthcareSimulation.Api.csproj -c Release -o publish/Api
-
-      - name: Publish AI Training Debrief Service
-        run: dotnet publish AIHealthcareSimulation.AIAnalyzer/AIHealthcareSimulation.AIAnalyzer.csproj -c Release -o publish/AIAnalyzer
-
-      - name: Publish Notification Service
-        run: dotnet publish AIHealthcareSimulation.Notification/AIHealthcareSimulation.Notification.csproj -c Release -o publish/Notification
 
       - name: Package Frontend
         run: mkdir -p publish/Frontend && cp -R frontend/dist/. publish/Frontend/

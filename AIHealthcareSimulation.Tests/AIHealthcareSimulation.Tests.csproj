@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AIHealthcareSimulation.Processor\AIHealthcareSimulation.Consumer.csproj" />
+    <ProjectReference Include="..\AIHealthcareSimulation.Api\AIHealthcareSimulation.Api.csproj" />
   </ItemGroup>
 
   <ItemGroup>

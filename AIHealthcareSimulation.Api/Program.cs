@@ -25,13 +25,31 @@ builder.Services.AddCors(options =>
             .AllowCredentials());
 });
 
+builder.Services.AddHttpClient();
+
 builder.Services.AddMassTransit(x =>
 {
+    x.AddConsumer<TrainingAssessmentConsumer>();
+    x.AddConsumer<TrainingDebriefConsumer>();
     x.AddConsumer<TrainingDebriefForwarder>();
 
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host(builder.Configuration["RabbitMq:Host"] ?? "localhost");
+
+        cfg.ReceiveEndpoint("simulation-training-assessment", endpoint =>
+        {
+            endpoint.ConfigureConsumer<TrainingAssessmentConsumer>(context);
+            endpoint.UseMessageRetry(r =>
+                r.Interval(3, TimeSpan.FromSeconds(5)));
+        });
+
+        cfg.ReceiveEndpoint("ai-training-debrief", endpoint =>
+        {
+            endpoint.ConfigureConsumer<TrainingDebriefConsumer>(context);
+            endpoint.UseMessageRetry(r =>
+                r.Interval(3, TimeSpan.FromSeconds(5)));
+        });
 
         cfg.ReceiveEndpoint("api-training-debriefs", endpoint =>
         {

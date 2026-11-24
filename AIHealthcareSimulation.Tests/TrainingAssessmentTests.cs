@@ -1,7 +1,7 @@
 using AIHealthcareSimulation.Contracts;
-using AIHealthcareSimulation.Processor;
+using AIHealthcareSimulation.Api.Consumers;
 
-namespace AIHealthcareSimulation.Processor.Tests;
+namespace AIHealthcareSimulation.Tests;
 
 public class TrainingAssessmentTests
 {

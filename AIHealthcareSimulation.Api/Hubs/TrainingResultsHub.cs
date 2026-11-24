@@ -5,9 +5,6 @@ namespace AIHealthcareSimulation.Api.Hubs;
 /// <summary>Provides real-time delivery of asynchronous training results.</summary>
 public sealed class TrainingResultsHub : Hub
 {
-    /// <summary>Subscribes the current connection to results for one simulation.</summary>
-    /// <param name="simulationId">The simulation ID to receive results for.</param>
-    /// <returns>A task that completes when the connection joins the result group.</returns>
     public Task JoinSimulation(Guid simulationId)
     {
         if (simulationId == Guid.Empty)

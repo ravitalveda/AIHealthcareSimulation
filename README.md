@@ -21,7 +21,7 @@ Phase 1 focuses on the domain and end-to-end workflow: React, ASP.NET Core, Rabb
 4. The AI analyzer asks local Ollama/Phi-3 for one draft reflection question.
 5. The completed result is published to RabbitMQ. The API forwards it to the active browser over SignalR; the optional notification service also displays it in the console.
 
-The browser never connects directly to RabbitMQ. A shared in-memory scenario catalog keeps the API and optional console simulator aligned.
+The browser never connects directly to RabbitMQ. A shared in-memory scenario catalog keeps the API and optional console simulator aligned. The API owns rubric assessment and AI processing in this PoC.
 
 ```mermaid
 flowchart LR
@@ -40,7 +40,7 @@ flowchart LR
 
 ## Architecture direction
 
-The six layers are the longer-term architecture; Phase 1 implements only the initial vertical slice.
+The six layers are the longer-term architecture; Phase 1 implements only the initial vertical slice. For this PoC, the API directly hosts the assessment and AI processing pipeline rather than deploying separate worker projects.
 
 | Layer | Responsibility | Phase 1 |
 |---|---|---|
@@ -85,28 +85,10 @@ docker run -d --name hospital-simulation-rabbitmq -p 5672:5672 -p 15672:15672 ra
 
 Run each required service in its own terminal from the repository root.
 
-**Terminal 1 — training processor**
-
-```bash
-dotnet run --project AIHealthcareSimulation.Processor/AIHealthcareSimulation.Consumer.csproj
-```
-
-**Terminal 2 — AI analyzer**
-
-```bash
-dotnet run --project AIHealthcareSimulation.AIAnalyzer/AIHealthcareSimulation.AIAnalyzer.csproj
-```
-
-**Terminal 3 — API**
+**Terminal 1 — API**
 
 ```bash
 dotnet run --project AIHealthcareSimulation.Api/AIHealthcareSimulation.Api.csproj
-```
-
-The notification consumer is optional; it prints completed feedback in the console:
-
-```bash
-dotnet run --project AIHealthcareSimulation.Notification/AIHealthcareSimulation.Notification.csproj
 ```
 
 ### Start the frontend
@@ -148,11 +130,8 @@ npm run lint --prefix frontend
 AIHealthcareSimulation
 ├── AIHealthcareSimulation.Api             # REST API and SignalR result delivery
 ├── AIHealthcareSimulation.Simulator       # Optional console publisher
-├── AIHealthcareSimulation.Processor       # Deterministic rubric outcome
-├── AIHealthcareSimulation.AIAnalyzer      # Ollama/Phi-3 reflection question
-├── AIHealthcareSimulation.Notification    # Optional console feedback consumer
-├── AIHealthcareSimulation.Contracts       # Shared events and scenario catalog
-├── AIHealthcareSimulation.Processor.Tests # Processor and catalog unit tests
+├── AIHealthcareSimulation.Tests           # Assessment and catalog unit tests
+├── AIHealthcareSimulation.Contracts       # Shared source contracts compiled into dependent projects
 └── frontend                                # React and TypeScript interface
 ```
 

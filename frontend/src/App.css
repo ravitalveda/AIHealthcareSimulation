@@ -455,9 +455,16 @@
 .ai-debrief > p {
   margin: 10px 0 0;
   color: #49574d;
-  font-size: 11px;
-  line-height: 1.7;
+  font-size: 12px;
+  line-height: 1.65;
   white-space: pre-wrap;
+}
+
+.ai-disclaimer {
+  display: block;
+  margin-top: 9px;
+  color: var(--muted);
+  font-size: 9px;
 }
 
 .review-note {

@@ -6,9 +6,6 @@ namespace AIHealthcareSimulation.Api.Endpoints;
 /// <summary>Maps endpoints for browsing training scenarios.</summary>
 public static class ScenarioEndpoints
 {
-    /// <summary>Maps the scenario endpoints onto the application.</summary>
-    /// <param name="endpoints">The application's endpoint route builder.</param>
-    /// <returns>The endpoint route builder for further configuration.</returns>
     public static IEndpointRouteBuilder MapScenarioEndpoints(
         this IEndpointRouteBuilder endpoints)
     {

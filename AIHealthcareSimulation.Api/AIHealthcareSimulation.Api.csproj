@@ -14,7 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AIHealthcareSimulation.Contracts\AIHealthcareSimulation.Contracts.csproj" />
+    <Compile Include="..\AIHealthcareSimulation.Contracts\*.cs"
+             Link="Contracts\%(Filename)%(Extension)" />
   </ItemGroup>
 
 </Project>

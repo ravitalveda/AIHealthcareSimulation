@@ -31,6 +31,13 @@ interface TrainingDebrief {
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5277'
 
+function plainTextAiResponse(text: string) {
+  return text
+    .replace(/[*_#]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
 async function getApiError(response: Response) {
   const fallbackMessage = `Request failed (HTTP ${response.status}).`
 
@@ -349,8 +356,9 @@ function App() {
                 </p>
               </div>
               <div className="ai-debrief">
-                <div className="ai-label"><span aria-hidden="true">✳</span> AI reflection question · draft</div>
-                <p>{debrief.aiReflectionQuestion}</p>
+                <div className="ai-label"><span aria-hidden="true">✳</span> AI coaching aid</div>
+                <p>{plainTextAiResponse(debrief.aiReflectionQuestion)}</p>
+                <span className="ai-disclaimer">Training suggestion — discuss this with an educator</span>
               </div>
               <p className="review-note">Use this as a learning aid. Review feedback with an educator.</p>
             </div>
